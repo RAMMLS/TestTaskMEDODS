@@ -17,6 +17,7 @@ WORKDIR /app
 RUN apk add --no-cache ca-certificates
 
 COPY --from=builder /out/taskservice /app/taskservice
+COPY static/ /app/static/
 
 EXPOSE 8080
 

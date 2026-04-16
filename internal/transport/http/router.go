@@ -24,5 +24,9 @@ func NewRouter(taskHandler *httphandlers.TaskHandler, docsHandler *swaggerdocs.H
 	api.HandleFunc("/tasks/{id:[0-9]+}", taskHandler.Update).Methods(http.MethodPut)
 	api.HandleFunc("/tasks/{id:[0-9]+}", taskHandler.Delete).Methods(http.MethodDelete)
 
+	// Serve frontend static files
+	fs := http.FileServer(http.Dir("./static"))
+	router.PathPrefix("/").Handler(fs)
+
 	return router
 }
